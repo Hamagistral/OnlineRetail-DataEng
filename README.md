@@ -57,7 +57,7 @@ This an end-to-end data engineering project, where I created a robust data pipel
 ## 📝 Project Architecture
 
 ### 🔧 Pipeline Architecture
-![image](https://github.com/Hamagistral/OnlineRetail-DataEng/assets/66017329/3f29afce-4e05-49ca-93d2-49115e1900a0)
+![onlineretail-arch](https://github.com/Hamagistral/OnlineRetail-DataEng/assets/66017329/9ce4a822-3c4c-4371-93b0-ebbaeb4df67d)
 
 ### 🌪️ Pipeline on Airflow
 ![airflowretail](https://github.com/Hamagistral/OnlineRetail-DataEng/assets/66017329/70df1a85-7c22-4ffb-afcc-01a6b67e99c6)
