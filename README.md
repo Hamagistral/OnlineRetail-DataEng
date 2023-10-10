@@ -9,7 +9,7 @@
     </ul>
   </div>
   
-  <p>Retail Data Pipeline with Airflow, GCP BigQuery, dbt, Soda, and Looker</p>
+  <p>Retail Data Pipeline with Terraform, Airflow, GCP BigQuery, dbt, Soda, and Looker</p>
     <a href="https://lookerstudio.google.com/reporting/da5da0af-4be0-4f7d-a84b-f7c2892df612/" target="_blank">Dashboard</a>
     📊 
     <a href="https://github.com/Hamagistral/OnlineRetail-DataEng" target="_blank">Request Feature</a>
@@ -28,7 +28,24 @@
 <a name="introduction"></a>
 ## 🔬 Project Overview 
 
-This an end-to-end data engineering project, where I created a robust data pipeline using Airflow, BigQuery, dbt, Soda, and Looker Studio. 
+This an end-to-end data engineering project, where I created a robust data pipeline using Terraform, Airflow, BigQuery, dbt, Soda, and Looker Studio. 
+
+### 💾 Dataset
+
+This is a transnational data set which contains all the transactions occurring between 01/12/2010 and 09/12/2011 for a UK-based and registered non-store online retail. The company mainly sells unique all-occasion gifts. Many customers of the company are wholesalers.
+
+The dataset includes the following columns:
+
+| **Column** | **Description** |
+| :--------------- |:---------------| 
+| **InvoiceNo** |  Invoice number. Nominal, a 6-digit integral number uniquely assigned to each transaction. If this code starts with letter 'c', it indicates a cancellation.  |  
+| **StockCode** | Product (item) code. Nominal, a 5-digit integral number uniquely assigned to each distinct product. |
+| **Description**   |  Product (item) name. Nominal.  |
+| **Quantity**   |  The quantities of each product (item) per transaction. Numeric.  |
+| **InvoiceDate**   |  Invice Date and time. Numeric, the day and time when each transaction was generated.  |
+| **UnitPrice**   |  Unit price. Numeric, Product price per unit in sterling.  |
+| **CustomerID**   |  Customer number. Nominal, a 5-digit integral number uniquely assigned to each customer.  |
+| **Country**   |  Country name. Nominal, the name of the country where each customer resides.   |
 
 ### 🎯 Project Goals
 
@@ -56,6 +73,18 @@ This an end-to-end data engineering project, where I created a robust data pipel
 <a name="arch"></a>
 ## 📝 Project Architecture
 
+The end-to-end data pipeline includes the next steps:
+
+- Downloading, processing and uploading of the initial dataset to a Data Lake *(GCP Storage Bucket)*
+- Moving the data from the lake to a Data Warehouse *(GCP BigQuery)*
+- Transforming the data in the Data Warehouse and preparing it for the dashboard *(dbt)*
+- Checking the quality of the data in the Data Warehouse *(Soda)*
+- Creating the dashboard *(Looker Studio)*
+  
+You can find the detailed information on the diagram below:
+
+![Architecture](https://github.com/Hamagistral/OnlineRetail-DataEng/assets/66017329/43a6bf65-d5c2-45fb-8e22-08ec27d700ef)
+
 ### 🔧 Pipeline Architecture
 ![onlineretail-arch](https://github.com/Hamagistral/OnlineRetail-DataEng/assets/66017329/9ce4a822-3c4c-4371-93b0-ebbaeb4df67d)
 
@@ -67,22 +96,77 @@ This an end-to-end data engineering project, where I created a robust data pipel
 
 ### 🛠️ Technologies Used
 
-- **Google Cloud Platform (GCP)** Cloud Storage and BigQuery.
+- **Google Cloud Platform (GCP)**
+  - Data Lake (DL): Cloud Storage
+  - Data Warehouse (DWH): BigQuery
 - **Astro SDK** for Airflow.
-- **Apache Airflow**.
-- **dbt (Data Build Tool)**.
-- **Soda** for data quality checks.
-- **Docker** for containerization.
-- **Looker Studio** for data visualization and exploration.
+- **Workflow orchestration:** Apache Airflow.
+- **Transforming data:** dbt (Data Build Tool).
+- **Data quality checks:** Soda.
+- **Containerization:** Docker.
+- **Data Visualization:** Looker Studio.
 
 <a name="usage"></a>
 ## 💻 Usage
 
-1. Clone this repository.
+First clone this repository.
+
 ```
 git clone https://github.com/Hamagistral/OnlineRetail-DataEng.git
 ```
-2. Start Airflow on your local machine by running:
+
+#### 1. Pre-requisites
+
+Make sure you have the following pre-installed components:
+
+- [GCP account](https://cloud.google.com/?hl=en)
+- [Terraform](https://developer.hashicorp.com/terraform/downloads)
+- [Docker](https://docs.docker.com/get-docker/)
+  
+#### 2. Google Cloud Platform
+To set up GCP, please follow the steps below:
+
+1. If you don't have a GCP account, please create a free trial.
+2. Setup new project and write down your Project ID.
+3. Configure service account to get access to this project and download auth-keys (.json). Please check the service account has all the permissions below:
+    - Viewer
+    - Storage Admin
+    - Storage Object Admin
+    - BigQuery Admin
+4. Download SDK for local setup.
+5. Set environment variable to point to your downloaded auth-keys:
+```
+export GOOGLE_APPLICATION_CREDENTIALS="<path/to/your/service-account-authkeys>.json"
+
+# Refresh token/session, and verify authentication
+gcloud auth application-default login
+```
+
+6. Enable the following options under the APIs and services section:
+  - Identity and Access Management (IAM) API
+  - IAM service account credentials API
+
+#### 3. Terraform
+We use Terraform to build and manage GCP infrastructure. Terraform configuration files are located in the separate folder. There are 3 configuration files:
+
+- terraform-version - contains information about the installed version of Terraform;
+- variables.tf - contains variables to make your configuration more dynamic and flexible;
+- main.tf - is a key configuration file consisting of several sections.
+
+Now you can use the steps below to generate resources inside the GCP:
+
+1. Move to the terraform folder using bash command `cd.`
+2. Run `terraform init` command to initialize the configuration.
+3. Use `terraform plan` to match previews local changes against a remote state.
+4. Apply changes to the cloud with terraform apply command.
+
+> Note: In steps 3 and 4 Terraform may ask you to specify the Project ID. Please use the ID that you noted down earlier at the project setup stage.
+
+If you would like to remove your stack from the Cloud, use the `terraform destroy` command.
+
+#### 4. Airflow
+
+1. Start Airflow on your local machine by running:
 ```
 astro dev start
 ```
@@ -93,24 +177,25 @@ This command will spin up 4 Docker containers on your machine, each for a differ
 - Scheduler: The Airflow component responsible for monitoring and triggering tasks
 - Triggerer: The Airflow component responsible for triggering deferred tasks
 
-3. Verify that all 4 Docker containers were created by running 'docker ps'.
+2. Verify that all 4 Docker containers were created by running 'docker ps'.
 
 Note: Running 'astro dev start' will start your project with the Airflow Webserver exposed at port 8080 and Postgres exposed at port 5432. If you already have either of those ports allocated, you can either [stop your existing Docker containers or change the port](https://docs.astronomer.io/astro/test-and-troubleshoot-locally#ports-are-not-available).
 
-4. Access the Airflow UI for your local Airflow project. To do so, go to http://localhost:8080/ and log in with 'admin' for both your Username and Password.
+3. Access the Airflow UI for your local Airflow project. To do so, go to http://localhost:8080/ and log in with 'admin' for both your Username and Password.
 
 You should also be able to access your Postgres Database at 'localhost:5432/postgres'.
 
-5. Configure your Google Cloud Platform credentials.
-6. Create and configure the necessary connections in Airflow.
-7. Customize the Airflow DAGs to suit your specific requirements.
-8. Run the pipeline and monitor its execution.
-9. Explore the data using Looker Studio for insights and visualization.
+4. Configure your Google Cloud Platform credentials.
+5. Create and configure the necessary connections in Airflow.
+6. Customize the Airflow DAGs to suit your specific requirements.
+7. Run the pipeline and monitor its execution.
+8. Explore the data using Looker Studio for insights and visualization.
 
 <a name="refs"></a>
 ## 📋 Credits
 
-This Project is inspired by the recent video of the [YouTube Channel Data With Marc](https://www.youtube.com/watch?v=DzxtCxi4YaA)
+- This Project is inspired by the recent video of the [YouTube Channel Data With Marc](https://www.youtube.com/watch?v=DzxtCxi4YaA)  
+- Readme inspired by this [Project](https://github.com/SVizor42/DE_Zoomcamp/tree/main/Project)
 
 <a name="contact"></a>
 ## 📨 Contact Me
