@@ -28,11 +28,11 @@
 <a name="introduction"></a>
 ## 🔬 Project Overview 
 
-This an end-to-end data engineering project, where I created a robust data pipeline using Terraform, Airflow, BigQuery, dbt, Soda, and Looker Studio. 
+This an end-to-end data engineering project, where I created a robust data pipeline to extract, analyze, and visualize insights from the data.
 
 ### 💾 Dataset
 
-This is a transnational data set which contains all the transactions occurring between 01/12/2010 and 09/12/2011 for a UK-based and registered non-store online retail. The company mainly sells unique all-occasion gifts. Many customers of the company are wholesalers.
+This is a transnational data set that contains all the transactions occurring between 01/12/2010 and 09/12/2011 for a UK-based and registered non-store online retail. The company mainly sells unique all-occasion gifts. Many customers of the company are wholesalers.
 
 The dataset includes the following columns:
 
@@ -42,7 +42,7 @@ The dataset includes the following columns:
 | **StockCode** | Product (item) code. Nominal, a 5-digit integral number uniquely assigned to each distinct product. |
 | **Description**   |  Product (item) name. Nominal.  |
 | **Quantity**   |  The quantities of each product (item) per transaction. Numeric.  |
-| **InvoiceDate**   |  Invice Date and time. Numeric, the day and time when each transaction was generated.  |
+| **InvoiceDate**   |  Invoice Date and time. Numeric, the day and time when each transaction was generated.  |
 | **UnitPrice**   |  Unit price. Numeric, Product price per unit in sterling.  |
 | **CustomerID**   |  Customer number. Nominal, a 5-digit integral number uniquely assigned to each customer.  |
 | **Country**   |  Country name. Nominal, the name of the country where each customer resides.   |
@@ -75,7 +75,7 @@ The dataset includes the following columns:
 
 The end-to-end data pipeline includes the next steps:
 
-- Downloading, processing and uploading of the initial dataset to a Data Lake *(GCP Storage Bucket)*
+- Downloading, processing, and uploading the initial dataset to a Data Lake *(GCP Storage Bucket)*
 - Moving the data from the lake to a Data Warehouse *(GCP BigQuery)*
 - Transforming the data in the Data Warehouse and preparing it for the dashboard *(dbt)*
 - Checking the quality of the data in the Data Warehouse *(Soda)*
@@ -109,7 +109,7 @@ You can find the detailed information on the diagram below:
 <a name="usage"></a>
 ## 💻 Usage
 
-First clone this repository.
+First, clone this repository.
 
 ```
 git clone https://github.com/Hamagistral/OnlineRetail-DataEng.git
@@ -127,7 +127,7 @@ Make sure you have the following pre-installed components:
 To set up GCP, please follow the steps below:
 
 1. If you don't have a GCP account, please create a free trial.
-2. Setup new project and write down your Project ID.
+2. Set up new project and write down your Project ID.
 3. Configure service account to get access to this project and download auth-keys (.json). Please check the service account has all the permissions below:
     - Viewer
     - Storage Admin
@@ -158,7 +158,7 @@ Now you can use the steps below to generate resources inside the GCP:
 1. Move to the terraform folder using bash command `cd.`
 2. Run `terraform init` command to initialize the configuration.
 3. Use `terraform plan` to match previews local changes against a remote state.
-4. Apply changes to the cloud with terraform apply command.
+4. Apply changes to the cloud with `terraform apply` command.
 
 > Note: In steps 3 and 4 Terraform may ask you to specify the Project ID. Please use the ID that you noted down earlier at the project setup stage.
 
@@ -172,10 +172,10 @@ astro dev start
 ```
 This command will spin up 4 Docker containers on your machine, each for a different Airflow component:
 
-- Postgres: Airflow's Metadata Database
-- Webserver: The Airflow component responsible for rendering the Airflow UI
-- Scheduler: The Airflow component responsible for monitoring and triggering tasks
-- Triggerer: The Airflow component responsible for triggering deferred tasks
+- **Postgres:** Airflow's Metadata Database
+- **Webserver:** The Airflow component responsible for rendering the Airflow UI
+- **Scheduler:** The Airflow component responsible for monitoring and triggering tasks
+- **Triggerer:** The Airflow component responsible for triggering deferred tasks
 
 2. Verify that all 4 Docker containers were created by running 'docker ps'.
 
