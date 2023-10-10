@@ -20,7 +20,7 @@ from airflow.models.baseoperator import chain
     start_date=datetime(2023, 9, 19),
     schedule=None,
     catchup=False,
-    tags=['retail'],
+    tags=['retail']
 )
 def retail():
     upload_csv_to_gcs = LocalFilesystemToGCSOperator(
@@ -34,7 +34,7 @@ def retail():
     
     create_retail_dataset = BigQueryCreateEmptyDatasetOperator(
         task_id='create_retail_dataset',
-        dataset_id='retail',
+        dataset_id='online_retail_dw',
         gcp_conn_id='gcp',
     )
 
