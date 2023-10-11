@@ -73,8 +73,9 @@ The dataset includes the following columns:
 <a name="arch"></a>
 ## 📝 Project Architecture
 
-The end-to-end data pipeline includes the next steps:
+The end-to-end data pipeline includes the following steps:
 
+- Setting up the infrastructure on GCP *(Terraform)*
 - Downloading, processing, and uploading the initial dataset to a Data Lake *(GCP Storage Bucket)*
 - Moving the data from the lake to a Data Warehouse *(GCP BigQuery)*
 - Transforming the data in the Data Warehouse and preparing it for the dashboard *(dbt)*
@@ -96,15 +97,16 @@ You can find the detailed information on the diagram below:
 
 ### 🛠️ Technologies Used
 
+- **Infrastructure**: Terraform
 - **Google Cloud Platform (GCP)**
   - Data Lake (DL): Cloud Storage
   - Data Warehouse (DWH): BigQuery
-- **Astro SDK** for Airflow.
-- **Workflow orchestration:** Apache Airflow.
-- **Transforming data:** dbt (Data Build Tool).
-- **Data quality checks:** Soda.
-- **Containerization:** Docker.
-- **Data Visualization:** Looker Studio.
+- **Astro SDK** for Airflow
+- **Workflow orchestration:** Apache Airflow
+- **Transforming data:** dbt (Data Build Tool)
+- **Data quality checks:** Soda
+- **Containerization:** Docker
+- **Data Visualization:** Looker Studio
 
 <a name="usage"></a>
 ## 💻 Usage
