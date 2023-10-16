@@ -1,6 +1,6 @@
 <div align="center">
   <a href="https://lookerstudio.google.com/reporting/da5da0af-4be0-4f7d-a84b-f7c2892df612">
-    <img src="https://github.com/Hamagistral/OnlineRetail-DataEng/assets/66017329/e0688cc7-fe66-4752-a256-1539f13d58c9" alt="Banner" width="720">
+    <img src="https://github.com/Hamagistral/OnlineRetail-DataEng/assets/66017329/f9b84b6c-a444-4296-bb33-0d6322896cba" alt="Banner" width="720">
   </a>
 
   <div id="user-content-toc">
@@ -19,7 +19,7 @@
 ## 📝 Table of Contents
 
 1. [ Project Overview ](#introduction)
-2. [ Key Features ](#features)
+2. [ Key Insights ](#features)
 3. [ Project Architecture ](#arch)
 4. [ Usage ](#usage)
 5. [ Credits ](#refs)
@@ -28,7 +28,7 @@
 <a name="introduction"></a>
 ## 🔬 Project Overview 
 
-This an end-to-end data engineering project, where I created a robust data pipeline to extract, analyze, and visualize insights from the data.
+This an end-to-end data engineering project, where I created a robust data pipeline to extract, analyze, and visualize insights from the data of the online retail company.
 
 ### 💾 Dataset
 
@@ -49,26 +49,33 @@ The dataset includes the following columns:
 
 ### 🎯 Project Goals
 
-- Create a data pipeline from scratch using Apache Airflow.
+- Set up the cloud infrastructure using Terraform.
 - Set up your Airflow local environment with the Astro CLI.
+- Create a data pipeline from scratch using Apache Airflow.
+- Upload CSV files into Google Cloud Storage.
+- Ingest data into BigQuery.
 - Implement data quality checks in the pipeline using Soda.
 - Integrate dbt and run data models with Airflow and Cosmos.
-- Isolate tasks to avoid dependency conflicts.
-- Upload CSV files into Google Cloud Storage.
-- Ingest data into BigQuery using the Astro SDK.
+- Visualize insights using Looker Studio.
 
 <a name="features"></a>
-## 🔌 Key Features
+## 🕵️ Key Insights
 
-- **End-to-End Data Pipeline**: This project provides a complete data engineering solution, from data ingestion to visualization.
+- 💸 **Total Revenue by Country**
+  - The UK 🇬🇧 is the country that generated the most of the company's revenue with over 7M followed by the Netherlands with 285k.
+ 
+- 🎁 **Top 3 sold products**
+  - **N°1:** "PAPER CRAFT, LITTLE BIRDIE" is the Top selling product with 24,5%
+  - **N°2:** "MEDIUM CERAMIC TOP STORAGE JAR" is the second Top seller with 23%
+  - **N°3:** "WORLD WAR 2 GLIDERS" are the third most selling gift product with 15,6%
 
-- **Modular Airflow DAGs**: Airflow Directed Acyclic Graphs (DAGs) are modular and easy to maintain, ensuring efficient pipeline execution.
+ > These 3 products alone account for more than 50% of the sales.
 
-- **Data Quality Checks**: Ensure data integrity and quality with automated data quality checks using Soda.
+- 📈 **Revenue by months"
+  - The month with the most revenue is November with more than 1,1M.
+  - The month with the lowest revenue is February.
 
-- **Integration with dbt**: Leverage dbt for data transformation and modeling within the Airflow pipeline.
-
-- **Google Cloud Integration**: Utilize Google Cloud Storage and BigQuery for scalable and cost-effective data storage and processing.
+> This can be explained by the months of October, November, and December having important holidays like Christmas, Halloween, etc... where people tend to give each other gifts.
 
 <a name="arch"></a>
 ## 📝 Project Architecture
