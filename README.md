@@ -71,7 +71,7 @@ The dataset includes the following columns:
 
  > These 3 products alone account for more than 50% of the sales.
 
-- 📈 **Revenue by months"
+- 📈 **Revenue by months**
   - The month with the most revenue is November with more than 1,1M.
   - The month with the lowest revenue is February.
 
