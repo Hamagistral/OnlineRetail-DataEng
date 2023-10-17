@@ -164,7 +164,7 @@ We use Terraform to build and manage GCP infrastructure. Terraform configuration
 
 Now you can use the steps below to generate resources inside the GCP:
 
-1. Move to the terraform folder using bash command `cd.`
+1. Move to the terraform folder using bash command `cd`
 2. Run `terraform init` command to initialize the configuration.
 3. Use `terraform plan` to match previews local changes against a remote state.
 4. Apply changes to the cloud with `terraform apply` command.
