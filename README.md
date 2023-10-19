@@ -28,7 +28,7 @@
 <a name="introduction"></a>
 ## 🔬 Project Overview 
 
-This an end-to-end data engineering project, where I created a robust data pipeline to extract, analyze, and visualize insights from the data of the online retail company.
+This an end-to-end data engineering project, where I created an ELT data pipeline to extract, analyze, and visualize insights from the data of an online retail company based in the UK.
 
 ### 💾 Dataset
 
@@ -38,7 +38,7 @@ The dataset includes the following columns:
 
 | **Column** | **Description** |
 | :--------------- |:---------------| 
-| **InvoiceNo** |  Invoice number. Nominal, a 6-digit integral number uniquely assigned to each transaction. If this code starts with letter 'c', it indicates a cancellation.  |  
+| **InvoiceNo** |  Invoice number. Nominal, a 6-digit integral number uniquely assigned to each transaction. If this code starts with the letter 'c', it indicates a cancellation.  |  
 | **StockCode** | Product (item) code. Nominal, a 5-digit integral number uniquely assigned to each distinct product. |
 | **Description**   |  Product (item) name. Nominal.  |
 | **Quantity**   |  The quantities of each product (item) per transaction. Numeric.  |
